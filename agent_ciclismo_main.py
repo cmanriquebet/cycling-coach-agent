@@ -29,7 +29,6 @@ try:
     from config import (
         GARMIN_EMAIL,
         GARMIN_PASSWORD,
-        WHATSAPP_NUMBER,
         GOOGLE_SHEETS_ID,
         FTP,
         PESO,
@@ -410,16 +409,16 @@ def main():
     if tarea == "test":
         print("🧪 TESTING DEL SISTEMA\n")
         print("✅ Garmin Connect: Listo")
-        print("✅ WhatsApp: Listo")
+        print("✅ Telegram: Listo")
         print("✅ Google Sheets: Listo")
         print("✅ Entrenamientos: Listo")
         print("✅ Análisis: Listo")
         print("\n✅ SISTEMA LISTO PARA INICIAR 24/7\n")
         print("Próximas tareas automáticas:")
         print("  03:30 AM: Descarga de Garmin")
-        print("  07:30 AM: Plan del día")
-        print("  19:00 PM: Análisis de sesión")
-        print("  Domingo 20:00: Plan semanal\n")
+        print("  07:30 AM: Plan del día (Telegram)")
+        print("  19:00 PM: Análisis de sesión (Telegram)")
+        print("  Domingo 20:00: Plan semanal (Telegram)\n")
     
     elif tarea == "download_garmin":
         descargar_datos_garmin()
