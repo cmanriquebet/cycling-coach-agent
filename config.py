@@ -1,40 +1,32 @@
-# ⚙️ CONFIGURACIÓN DEL AGENTE
-# Lee desde GitHub Secrets (SEGURO)
-
-import os
+# ⚙️ CONFIGURACIÓN DEL AGENTE CICLISMO
+# Credenciales y parámetros personales
 
 # ============================================================================
-# CREDENCIALES GARMIN CONNECT (desde Secrets)
+# CREDENCIALES GARMIN CONNECT
 # ============================================================================
 
-GARMIN_EMAIL = os.getenv("GARMIN_EMAIL", "carlotronico@hotmail.com")
-GARMIN_PASSWORD = os.getenv("GARMIN_PASSWORD", "")
+GARMIN_EMAIL = "carlotronico@hotmail.com"
+GARMIN_PASSWORD = "3_Xq.@Spnv3gQy-"
 
 # ============================================================================
-# WHATSAPP (desde Secrets)
+# GOOGLE SHEETS (DASHBOARD)
 # ============================================================================
 
-WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "+34607961337")
-
-# ============================================================================
-# GOOGLE SHEETS (desde Secrets)
-# ============================================================================
-
-GOOGLE_SHEETS_ID = os.getenv("GOOGLE_SHEETS_ID", "")
+GOOGLE_SHEETS_ID = "1HmPiPIPabeNEnrughjFApo1ZdFk0X1o4FHDA3g2oJVQ"
 
 # ============================================================================
 # TU PERFIL CICLISTA
 # ============================================================================
 
-FTP = 252  # Watts
+FTP = 252  # Watts (Functional Threshold Power)
 PESO = 71  # kg
 HR_MAX = 187  # Frecuencia cardíaca máxima
 
-# Tipo: "CARRETERA", "MTB", "MIXTO"
-TIPO_CICLISTA = "MIXTO"
+TIPO_CICLISTA = "MIXTO"  # Carretera + MTB
 
 # ============================================================================
-# NO EDITES NADA MÁS ABAJO
+# COMUNICACIÓN: TELEGRAM (via variables de entorno)
+# TELEGRAM_TOKEN y TELEGRAM_CHAT_ID se leen automáticamente
 # ============================================================================
 
 DEBUG = False
