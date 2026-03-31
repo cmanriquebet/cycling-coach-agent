@@ -3,10 +3,10 @@
 """
 🚴 AGENTE PREPARADOR FÍSICO DE CICLISMO 24/7
 Sistema completo automatizado para entrenamientos personalizados
-Con Garmin Connect, WhatsApp, Google Sheets y análisis fisiológico
+Con Garmin Connect, Telegram, Google Sheets y análisis fisiológico
 
 Autor: Sistema IA de Coaching
-Versión: 1.0 - Producción
+Versión: 1.1 - Con Telegram integrado
 """
 
 import os
@@ -116,18 +116,18 @@ def diagnosticar_estado(ctl, atl, tsb):
         return "🔴 MUY CANSADO - RIESGO de lesión"
 
 # ============================================================================
-# 📱 WHATSAPP
+# 📱 TELEGRAM
 # ============================================================================
 
 def enviar_telegram(texto):
     """Envía mensaje por Telegram"""
     try:
-        import os
         token = os.getenv("TELEGRAM_TOKEN")
         chat_id = os.getenv("TELEGRAM_CHAT_ID")
         
         if not token or not chat_id:
-            logger.error("❌ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID no configurados")
+            logger.warning("⚠️ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID no configurados")
+            logger.info(f"📝 Mensaje no enviado (testing mode): {texto[:100]}...")
             return False
         
         url = f"https://api.telegram.org/bot{token}/sendMessage"
@@ -137,10 +137,10 @@ def enviar_telegram(texto):
             "parse_mode": "HTML"
         }
         
-        response = requests.post(url, json=data)
+        response = requests.post(url, json=data, timeout=10)
         
         if response.status_code == 200:
-            logger.info(f"✅ Mensaje Telegram enviado")
+            logger.info(f"✅ Mensaje Telegram enviado correctamente")
             return True
         else:
             logger.error(f"❌ Error Telegram: {response.text}")
