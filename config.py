@@ -1,30 +1,32 @@
 # ⚙️ CONFIGURACIÓN DEL AGENTE
-# EDITA ESTE ARCHIVO CON TUS DATOS
+# Lee desde GitHub Secrets (SEGURO)
+
+import os
 
 # ============================================================================
-# CREDENCIALES GARMIN CONNECT
+# CREDENCIALES GARMIN CONNECT (desde Secrets)
 # ============================================================================
 
-GARMIN_EMAIL = "carlotronico@hotmail.com"
-GARMIN_PASSWORD = "3_Xq.@Spnv3gQy-"  # ⬅️ EDITA ESTO CON TU CONTRASEÑA
+GARMIN_EMAIL = os.getenv("GARMIN_EMAIL", "carlotronico@hotmail.com")
+GARMIN_PASSWORD = os.getenv("GARMIN_PASSWORD", "")
 
 # ============================================================================
-# WHATSAPP
+# WHATSAPP (desde Secrets)
 # ============================================================================
 
-WHATSAPP_NUMBER = "+34607961337"  # ✅ Ya tienes este
+WHATSAPP_NUMBER = os.getenv("WHATSAPP_NUMBER", "+34607961337")
 
 # ============================================================================
-# GOOGLE SHEETS
+# GOOGLE SHEETS (desde Secrets)
 # ============================================================================
 
-GOOGLE_SHEETS_ID = "1HmPiPIPabeNEnrughjFApo1ZdFk0X1o4FHDA3g2oJVQ"  # ⬅️ Después me lo das
+GOOGLE_SHEETS_ID = os.getenv("GOOGLE_SHEETS_ID", "")
 
 # ============================================================================
 # TU PERFIL CICLISTA
 # ============================================================================
 
-FTP = 252  # Watts (Functional Threshold Power)
+FTP = 252  # Watts
 PESO = 71  # kg
 HR_MAX = 187  # Frecuencia cardíaca máxima
 
