@@ -223,22 +223,25 @@ class GeneradorEntranamientos:
             {"dia": "Miércoles", "tipo": "Técnica", "duracion": 50, "zona": "Z3"},
             {"dia": "Jueves", "tipo": "Descanso", "duracion": 0, "zona": "Z0"},
             {"dia": "Viernes", "tipo": "Z2 Suave", "duracion": 60, "zona": "Z2"},
-            {"dia": "Sábado", "tipo": "Competencia/Simulada", "duracion": 120, "zona": "Variable"},
+            {"dia": "Sábado", "tipo": "Competencia/Simulada", "duracion": 120, "zona": "Z2"},
             {"dia": "Domingo", "tipo": "Tirada Larga", "duracion": 150, "zona": "Z2"},
         ]
         
         for sesion_t in plantilla:
+            zona = sesion_t["zona"]
+            potencia = 0
+            
+            if zona in ZONAS and zona != "Z0":
+                potencia = int(ZONAS[zona]["max"] * 0.9)
+            
             sesion = {
                 "dia": sesion_t["dia"],
                 "tipo": sesion_t["tipo"],
                 "duracion_minutos": sesion_t["duracion"],
-                "zona": sesion_t["zona"],
-                "potencia_objetivo": int(ZONAS[sesion_t["zona"]]["max"] * 0.9) if sesion_t["zona"] != "Z0" else 0,
+                "zona": zona,
+                "potencia_objetivo": potencia,
                 "descripcion": self._generar_descripcion(sesion_t),
-                "tss_estimado": calcular_tss(
-                    int(ZONAS[sesion_t["zona"]]["max"] * 0.9) if sesion_t["zona"] != "Z0" else 0,
-                    sesion_t["duracion"]
-                )
+                "tss_estimado": calcular_tss(potencia, sesion_t["duracion"])
             }
             plan["sesiones"].append(sesion)
         
