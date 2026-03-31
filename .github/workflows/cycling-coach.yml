@@ -1,9 +1,19 @@
 name: 🚴 Cycling Coach Agent 24/7
 
 on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
   schedule:
-    # Ejecuta cada 2 minutos para testing
-    - cron: '*/2 * * * *'
+    # 03:30 AM UTC - Descarga Garmin
+    - cron: '30 3 * * *'
+    # 07:30 AM UTC - Envía plan
+    - cron: '30 7 * * *'
+    # 19:00 PM UTC - Análisis sesión
+    - cron: '0 19 * * *'
+    # Domingo 20:00 UTC - Plan semanal
+    - cron: '0 20 * * 0'
 
 jobs:
   run-cycling-coach:
@@ -25,10 +35,9 @@ jobs:
     
     - name: 🚴 Ejecutar Agente Ciclismo
       run: python agent_ciclismo_main.py
-env:
+      env:
         GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
         GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
-        WHATSAPP_NUMBER: ${{ secrets.WHATSAPP_NUMBER }}
         GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
         TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
         TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
