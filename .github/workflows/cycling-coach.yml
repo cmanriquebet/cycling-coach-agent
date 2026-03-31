@@ -31,8 +31,10 @@ jobs:
     
     - name: 🚴 Ejecutar Agente Ciclismo
       run: python agent_ciclismo_main.py
-      env:
+env:
         GARMIN_EMAIL: ${{ secrets.GARMIN_EMAIL }}
         GARMIN_PASSWORD: ${{ secrets.GARMIN_PASSWORD }}
         WHATSAPP_NUMBER: ${{ secrets.WHATSAPP_NUMBER }}
         GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+        TELEGRAM_TOKEN: ${{ secrets.TELEGRAM_TOKEN }}
+        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
