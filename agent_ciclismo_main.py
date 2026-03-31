@@ -119,16 +119,40 @@ def diagnosticar_estado(ctl, atl, tsb):
 # 📱 WHATSAPP
 # ============================================================================
 
-def enviar_whatsapp(texto):
-    """Envía mensaje por WhatsApp"""
+def enviar_telegram(texto):
+    """Envía mensaje por Telegram"""
     try:
-        # Simulación para testing (reemplazar con API real de Twilio/WhatsApp)
-        logger.info(f"📱 WhatsApp enviado a {WHATSAPP_NUMBER}")
-        logger.info(f"Mensaje: {texto[:100]}...")
-        return True
+        import os
+        token = os.getenv("TELEGRAM_TOKEN")
+        chat_id = os.getenv("TELEGRAM_CHAT_ID")
+        
+        if not token or not chat_id:
+            logger.error("❌ TELEGRAM_TOKEN o TELEGRAM_CHAT_ID no configurados")
+            return False
+        
+        url = f"https://api.telegram.org/bot{token}/sendMessage"
+        data = {
+            "chat_id": chat_id,
+            "text": texto,
+            "parse_mode": "HTML"
+        }
+        
+        response = requests.post(url, json=data)
+        
+        if response.status_code == 200:
+            logger.info(f"✅ Mensaje Telegram enviado")
+            return True
+        else:
+            logger.error(f"❌ Error Telegram: {response.text}")
+            return False
+            
     except Exception as e:
-        logger.error(f"❌ Error enviando WhatsApp: {e}")
+        logger.error(f"❌ Error enviando Telegram: {e}")
         return False
+
+def enviar_whatsapp(texto):
+    """Alias para mantener compatibilidad - usa Telegram"""
+    return enviar_telegram(texto)
 
 # ============================================================================
 # 🔌 GARMIN CONNECT
